@@ -1,6 +1,10 @@
 <!-- 💥 这里是一次性加载 LayoutComponents -->
 <template>
-  <el-watermark id="watermark" :font="font" :content="watermark ? ['Geeker Admin', 'Happy Working'] : ''">
+  <el-watermark
+    id="watermark"
+    :font="font"
+    :content="watermark ? ['Geeker Admin', 'Happy Working'] : ''"
+  >
     <component :is="LayoutComponents[layout]" />
     <ThemeDrawer />
   </el-watermark>
@@ -20,7 +24,7 @@ const LayoutComponents: Record<LayoutType, Component> = {
   vertical: LayoutVertical,
   classic: LayoutClassic,
   transverse: LayoutTransverse,
-  columns: LayoutColumns
+  columns: LayoutColumns,
 };
 
 const globalStore = useGlobalStore();
@@ -30,9 +34,16 @@ const layout = computed(() => globalStore.layout);
 const watermark = computed(() => globalStore.watermark);
 
 const font = reactive({ color: "rgba(0, 0, 0, .15)" });
-watch(isDark, () => (font.color = isDark.value ? "rgba(255, 255, 255, .15)" : "rgba(0, 0, 0, .15)"), {
-  immediate: true
-});
+watch(
+  isDark,
+  () =>
+    (font.color = isDark.value
+      ? "rgba(255, 255, 255, .15)"
+      : "rgba(0, 0, 0, .15)"),
+  {
+    immediate: true,
+  }
+);
 </script>
 
 <style scoped lang="scss">

@@ -100,9 +100,6 @@ const login = (formEl: FormInstance | undefined) => {
       });
       userStore.setToken(data.access_token);
 
-      // 2.添加动态路由
-      await initDynamicRouter();
-
       // 3.清空 tabs、keepAlive 数据
       tabsStore.setTabs([]);
       keepAliveStore.setKeepAliveName([]);
