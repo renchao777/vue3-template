@@ -1,14 +1,19 @@
 <template>
   <div class="card content-box">
-    <el-alert
-      title="通过 component :is 组件属性 && v-bind 属性透传，可以将 template 中的 html 代码全部改变为 columns 配置项，具体配置请看代码。"
-      type="warning"
-      :closable="false"
-    />
-    <component :is="'el-form'" v-bind="options.form" ref="proFormRef" :model="model">
+    <!-- 通过 component :is 组件属性 && v-bind 属性透传，可以将 template 中的 html 代码全部改变为 columns 配置项 -->
+    <component
+      :is="'el-form'"
+      v-bind="options.form"
+      ref="proFormRef"
+      :model="model"
+    >
       <template v-for="item in options.columns" :key="item.prop">
         <component :is="'el-form-item'" v-bind="item.formItem">
-          <component :is="`el-${item.attrs.typeName}`" v-bind="item.attrs" v-model="model[item.formItem.prop]" />
+          <component
+            :is="`el-${item.attrs.typeName}`"
+            v-bind="item.attrs"
+            v-model="model[item.formItem.prop]"
+          />
         </component>
       </template>
       <el-form-item>
@@ -20,9 +25,7 @@
 
 <script setup lang="ts" name="proForm">
 import { ref } from "vue";
-
 let model = ref<any>({});
-
 const options = ref({
   // 表单整体配置项
   form: {
@@ -31,7 +34,7 @@ const options = ref({
     labelWidth: "80px",
     size: "default",
     disabled: false,
-    labelSuffix: " :"
+    labelSuffix: " :",
   },
   // 表单列配置项 (formItem 代表 item 配置项，attrs 代表 输入、选择框 配置项)
   columns: [
@@ -40,42 +43,43 @@ const options = ref({
         label: "用户名",
         prop: "username",
         labelWidth: "80px",
-        required: true
+        required: true,
+        rules: [{ required: true, message: "请输入用户名", trigger: "blur" }],
       },
       attrs: {
         typeName: "input",
         clearable: true,
         placeholder: "请输入用户名",
-        disabled: true
-      }
+        disabled: false,
+      },
     },
     {
       formItem: {
         label: "密码",
         prop: "password",
-        class: "data"
+        required: true,
       },
       attrs: {
         typeName: "input",
         clearable: true,
         autofocus: true,
         placeholder: "请输入密码",
-        type: "password"
-      }
+        type: "password",
+      },
     },
     {
       formItem: {
         label: "邮箱",
-        prop: "email"
+        prop: "email",
       },
       attrs: {
         typeName: "input",
         placeholder: "请输入邮箱",
         clearable: true,
-        style: "width:500px"
-      }
-    }
-  ]
+        style: "width:500px",
+      },
+    },
+  ],
 });
 </script>
 

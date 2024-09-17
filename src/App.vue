@@ -7,7 +7,6 @@
 <script setup lang="ts">
 import { reactive, computed } from "vue";
 import { ElConfigProvider } from "element-plus";
-import { LanguageType } from "./stores/interface";
 import { useGlobalStore } from "@/stores/modules/global";
 
 const globalStore = useGlobalStore();
