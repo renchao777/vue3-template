@@ -7,6 +7,9 @@
   
   使用：给 Dom 加上 v-throttle 及回调函数即可
   <button v-throttle="debounceClick">节流提交</button>
+  适用于持续性事件，控制函数的调用频率。
+
+  使用场景 滚动加载 每隔一定时间处理一次滚动事件。  窗口调整大小 鼠标拖拽 频繁点击
 */
 import type { Directive, DirectiveBinding } from "vue";
 interface ElType extends HTMLElement {
@@ -35,7 +38,7 @@ const throttle: Directive = {
   },
   beforeUnmount(el: ElType) {
     el.removeEventListener("click", el.__handleClick__);
-  }
+  },
 };
 
 export default throttle;

@@ -27,7 +27,6 @@ import directives from "@/directives/index";
 // vue Router
 import router from "@/routers";
 // vue i18n
-import I18n from "@/languages/index";
 // pinia store
 import pinia from "@/stores";
 // errorHandler
@@ -38,8 +37,8 @@ const app = createApp(App);
 app.config.errorHandler = errorHandler;
 
 // register the element Icons component
-Object.keys(Icons).forEach(key => {
+Object.keys(Icons).forEach((key) => {
   app.component(key, Icons[key as keyof typeof Icons]);
 });
 
-app.use(ElementPlus).use(directives).use(router).use(I18n).use(pinia).mount("#app");
+app.use(ElementPlus).use(directives).use(router).use(pinia).mount("#app");
