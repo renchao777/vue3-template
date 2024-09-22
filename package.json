@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "vite",
     "build:dev": "vue-tsc && vite build --mode development",
+    "test": "vitest",
     "build": "vue-tsc && vite build --mode production"
   },
   "dependencies": {
@@ -39,9 +40,12 @@
     "@types/sortablejs": "^1.15.8",
     "@vitejs/plugin-vue": "^5.0.4",
     "@vitejs/plugin-vue-jsx": "^3.1.0",
+    "@vitest/coverage-v8": "^2.1.1",
+    "@vue/test-utils": "^2.4.6",
     "autoprefixer": "^10.4.19",
     "cz-git": "1.9.2",
     "czg": "^1.9.2",
+    "happy-dom": "^15.7.4",
     "postcss": "^8.4.38",
     "postcss-html": "^1.7.0",
     "prettier": "^3.3.3",
@@ -56,6 +60,7 @@
     "vite-plugin-pwa": "^0.20.0",
     "vite-plugin-svg-icons": "^2.0.1",
     "vite-plugin-vue-devtools": "^7.3.5",
+    "vitest": "^2.1.1",
     "vue-tsc": "^2.0.22"
   },
   "engines": {

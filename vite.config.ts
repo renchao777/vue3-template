@@ -11,6 +11,12 @@ const __APP_INFO__ = {
   pkg: { dependencies, devDependencies, name, version },
   lastBuildTime: dayjs().format("YYYY-MM-DD HH:mm:ss")
 };
+// 扩展 UserConfig 接口
+declare module "vite" {
+  interface UserConfig {
+    test?: any;
+  }
+}
 
 // @see: https://vitejs.dev/config/
 export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
@@ -24,8 +30,10 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
     resolve: {
       alias: {
         "@": resolve(__dirname, "./src"),
-        "vue-i18n": "vue-i18n/dist/vue-i18n.cjs.js"
       }
+    },
+    test: {
+      environment: 'happy-dom'
     },
     define: {
       __APP_INFO__: JSON.stringify(__APP_INFO__)
@@ -45,7 +53,9 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
       // Load proxy configuration from .env.development
       proxy: createProxy(viteEnv.VITE_PROXY)
     },
-    plugins: createVitePlugins(viteEnv),
+    plugins: [
+      ...createVitePlugins(viteEnv)
+    ],
     esbuild: {
       pure: viteEnv.VITE_DROP_CONSOLE ? ["console.log", "debugger"] : []
     },
